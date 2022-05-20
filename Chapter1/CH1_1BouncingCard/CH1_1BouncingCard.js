@@ -38,6 +38,7 @@ function draw() {
     chooseXSpeed();
   }
   if (y >= height - ySize && ySpeed > 10) {
+    y = height - ySize;
     ySpeed *= -.75;
   }
 
