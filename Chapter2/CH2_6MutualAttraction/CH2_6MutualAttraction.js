@@ -28,7 +28,6 @@ function setup() {
 
   movers[0].applyForce(createVector(90, 0));
   movers[1].applyForce(createVector(-90, 0));
-  //movers[2].applyForce(createVector(10, 0));
   movers[3].applyForce(createVector(0, -90));
   movers[4].applyForce(createVector(0, 90));
 }
@@ -36,7 +35,7 @@ function setup() {
 function draw() {
   background(24, 24, 24);
   fill(255);
-  text("Gravitational Force: " + force, 10, 30);
+  text("Click the mouse to destabilize", 10, 30);
 
   for (let i = 0; i < numMovers; i++) {
     movers[i].display();
@@ -48,5 +47,9 @@ function draw() {
         mover.attract(other);
       }
     }
+  }
+
+  if (mouseIsPressed) {
+    movers[2].applyForce(createVector(random(-100, 100), random(-100, 100)));
   }
 }
