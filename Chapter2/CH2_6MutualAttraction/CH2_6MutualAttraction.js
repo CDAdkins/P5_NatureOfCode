@@ -6,6 +6,7 @@ let distanceSq;
 let direction;
 let G; // gravitational constant
 let strength;
+let wireFrame = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -33,12 +34,16 @@ function setup() {
 }
 
 function draw() {
-  background(24, 24, 24);
+  background(24, 24, 24, 20);
   fill(255);
-  text("Click the mouse to destabilize", 10, 30);
+  text("Click the mouse to destabilize\nPress a key to toggle wireframe mode", 10, 30);
 
-  for (let i = 0; i < numMovers; i++) {
-    movers[i].display();
+  for (let mover of movers) {
+    if (wireFrame) {
+        mover.update();
+    } else {
+      mover.display(); 
+    }
   }
 
   for (let mover of movers) {
@@ -46,10 +51,24 @@ function draw() {
       if (mover !== other) {
         mover.attract(other);
       }
+      if (wireFrame) {
+        fill(255);
+        stroke(255);
+        line(mover.pos.x, mover.pos.y, other.pos.x, other.pos.y);
+      }
     }
   }
 
   if (mouseIsPressed) {
     movers[2].applyForce(createVector(random(-100, 100), random(-100, 100)));
+  }
+
+  if (keyIsPressed) {
+    background(24);
+    if (wireFrame === true) {
+      wireFrame = false;
+    } else if (wireFrame === false) {
+      wireFrame = true;
+    }
   }
 }
