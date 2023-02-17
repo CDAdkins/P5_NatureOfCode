@@ -12,7 +12,6 @@ function setup() {
 }
 
 function draw() {
- //i *= 1.0015;
   i += speed
   background(24, 24, 24, 255);
   noStroke();
